@@ -1,31 +1,22 @@
 import discord
-import json
-import os
+import json, os
 from discord.ext import commands
 
-with open('.\\Setting\\Token.json') as TokenFile:
+with open(r'.\setting\Token.json') as TokenFile:
     TokenData = json.load(TokenFile)
 
-with open('.\\Setting\\Setting.json') as SettingFile:
+with open(r'.\setting\Setting.json') as SettingFile:
     SettingData = json.load(SettingFile)
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=SettingData['Prefix'], intents=intents)
 
-@bot.event()
+@bot.event
 async def on_ready():
     BotName = SettingData['BotName']
     print(f'{BotName} is on ready')
 
-@bot.event()
-async def on_member_join(member):
-    print(f'{member} join {member.guild.name}')
-
-@bot.event()
-async def on_member_remove(member):
-    print(f'{member} leave {member.guild.name}')
-
-for Filename in os.listdir('.\\Commands'):
+for Filename in os.listdir(r'.\commands'):
     if Filename.endswith('.py'):
         bot.load_extension(f'commands.{Filename[:-3]}')
 

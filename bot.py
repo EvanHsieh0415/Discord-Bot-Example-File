@@ -4,10 +4,10 @@ import os
 from discord.ext import commands
 from datetime import datetime
 
-with open("./setting/Token.json") as TokenFile:
+with open("./setting/Token.json", "r") as TokenFile:
     TokenData = json.load(TokenFile)
 
-with open("./setting/botSetting.json") as SettingFile:
+with open("./setting/botSetting.json", "r") as SettingFile:
     SettingData = json.load(SettingFile)
 
 intents = discord.Intents.all()
